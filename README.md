@@ -512,6 +512,8 @@ Student_manager/
 如有问题或建议，请通过以下方式联系：
 - 提交 GitHub Issue
 - 发送邮件至项目维护者
+- QQ邮箱：3273495516@qq.com
+- Gmail：eighteenthstuai@gmail.com
 
 ---
 
