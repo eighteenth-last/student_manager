@@ -1,0 +1,32 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://172.31.142.67:3306/student_manager?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: qwer4321
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: always
+      encoding: UTF-8
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+  main:
+    allow-bean-definition-overriding: true
+
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.studentmanager.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+jwt:
+  secret: change-this-secret-to-a-long-random-string
+  expiration-minutes: 120
+
+logging:
+  level:
+    com.studentmanager: INFO
