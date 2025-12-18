@@ -9,15 +9,16 @@ import java.util.List;
 public interface StudentCourseMapper {
 
     @Select("SELECT * FROM student_course WHERE student_id = #{studentId} AND course_offering_id = #{courseOfferingId}")
-    StudentCourse findByStudentAndOffering(@Param("studentId") Long studentId, @Param("courseOfferingId") Long courseOfferingId);
+    StudentCourse findByStudentAndOffering(@Param("studentId") Long studentId,
+            @Param("courseOfferingId") Long courseOfferingId);
 
     @Select("SELECT * FROM student_course WHERE id = #{id}")
     StudentCourse findById(Long id);
 
-    @Select("SELECT * FROM student_course WHERE student_id = #{studentId} ORDER BY id ASC")
+    @Select("SELECT * FROM student_course WHERE student_id = #{studentId} AND status != 'DROPPED' ORDER BY id ASC")
     List<StudentCourse> findByStudent(Long studentId);
 
-    @Select("SELECT * FROM student_course WHERE course_offering_id = #{courseOfferingId} ORDER BY id ASC")
+    @Select("SELECT * FROM student_course WHERE course_offering_id = #{courseOfferingId} AND status != 'DROPPED' ORDER BY id ASC")
     List<StudentCourse> findByOffering(Long courseOfferingId);
 
     @Select("SELECT * FROM student_course ORDER BY id ASC")

@@ -112,9 +112,11 @@ const load = async () => {
   try {
     if (isStudent.value) {
       const enrollments = await fetchMyEnrollments();
-      enrolledCourseIds.value = new Set(enrollments.map((e: any) => e.courseOfferingId));
+      // 过滤掉已退选的课程（防御性编程）
+      const activeEnrollments = enrollments.filter((e: any) => e.status !== 'DROPPED');
+      enrolledCourseIds.value = new Set(activeEnrollments.map((e: any) => e.courseOfferingId));
       
-      myEnrollments.value = enrollments.map((e: any) => {
+      myEnrollments.value = activeEnrollments.map((e: any) => {
         const offering = courses.value.find((c: any) => c.id === e.courseOfferingId);
         return {
           ...e,

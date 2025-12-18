@@ -13,8 +13,8 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: Layout,
+    redirect: '/courses',
     children: [
-      { path: '', name: 'Dashboard', component: () => import('@/views/Dashboard.vue') },
       { path: 'students', name: 'Students', component: () => import('@/views/Students.vue'), meta: { roles: ['ADMIN', 'TEACHER'] } },
       { path: 'teachers', name: 'Teachers', component: () => import('@/views/Teachers.vue'), meta: { roles: ['ADMIN'] } },
       { path: 'classes', name: 'Classes', component: () => import('@/views/Classes.vue'), meta: { roles: ['ADMIN'] } },
@@ -41,7 +41,7 @@ router.beforeEach((to, _from, next) => {
   }
   const roles = to.meta.roles as string[] | undefined;
   if (roles && auth.role && !roles.includes(auth.role)) {
-    return next('/');
+    return next('/students');
   }
   return next();
 });

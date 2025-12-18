@@ -42,7 +42,9 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         if (offering.getCurrentStudents() >= offering.getMaxStudents()) {
             throw new BusinessException("该课程选课人数已满");
         }
-        if (studentCourseMapper.findByStudentAndOffering(studentId, courseId) != null) {
+        // 检查是否已选该课程（排除已退选的记录）
+        StudentCourse existing = studentCourseMapper.findByStudentAndOffering(studentId, courseId);
+        if (existing != null && !"DROPPED".equals(existing.getStatus())) {
             throw new BusinessException("已选该课程");
         }
         StudentCourse sc = new StudentCourse();

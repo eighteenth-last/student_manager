@@ -3,9 +3,7 @@
     <el-aside width="220px" class="sidebar">
       <div class="logo">学生管理</div>
       <el-menu :default-active="active" router class="menu" :collapse="false">
-        <el-menu-item index="/">
-          <span>项目概览</span>
-        </el-menu-item>
+
         <el-menu-item v-if="can('ADMIN')" index="/teachers">
           <span>教师管理</span>
         </el-menu-item>
